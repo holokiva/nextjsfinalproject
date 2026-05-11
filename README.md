@@ -2,6 +2,8 @@
 
 A small full-stack task manager built as a student-style assignment. You can register, log in, and maintain your own tasks (title, description, priority, status, optional due date). Tasks are private: you only see and edit what you created.
 
+**New to the codebase?** Open [`FOLDER-GUIDE.md`](./FOLDER-GUIDE.md) first — it explains what each folder is for in plain language.
+
 ## Technologies
 
 | Layer | Choice |
@@ -72,18 +74,18 @@ A small full-stack task manager built as a student-style assignment. You can reg
 
 ## Authentication flow (short)
 
-1. **Register** — A server action hashes the password (`bcryptjs`), stores the user in PostgreSQL via Prisma, then redirects to login.
+1. **Register** — `src/server/register-actions.ts` hashes the password (`bcryptjs`), stores the user in PostgreSQL via Prisma, then redirects to login.
 2. **Login** — The browser calls `signIn("credentials", …)` (Auth.js). The credentials provider checks email + password hash and issues a **JWT session** (encrypted cookie).
 3. **Protected routes** — `src/proxy.ts` runs before `/tasks` routes. If there is no session, the user is sent to `/login` with a `callbackUrl`. Logged-in users hitting `/login` or `/register` are redirected to `/tasks`.
 4. **Logout** — `signOut` clears the session cookie.
 
-Session data is read in Server Components and server actions with `auth()` from `src/auth.ts`.
+Session data is read in Server Components and server actions with `auth()` from `src/auth/` (`index.ts`).
 
 ## Prisma usage (short)
 
 - **`prisma/schema.prisma`** defines `User` and `Task` (and enums for priority/status).
-- **`src/lib/db.ts`** exports a single `PrismaClient` instance (avoids too many connections during Next.js dev hot reload).
-- **Server actions** in `src/app/tasks/actions.ts` perform **create / update / delete** with `userId` from the session so rows are scoped per user.
+- **`src/database/prisma.ts`** exports a single `PrismaClient` instance (avoids too many connections during Next.js dev hot reload).
+- **Server actions** in `src/server/task-actions.ts` perform **create / update / delete** with `userId` from the session so rows are scoped per user.
 - **Pages** use `prisma.task.findMany` / `findFirst` with the same `userId` filter for reads.
 
 After changing the schema, run `npm run db:push` or `db:migrate`, and `npm run db:generate` if you need to refresh the client outside of `npm run build`.
@@ -99,15 +101,19 @@ After changing the schema, run `npm run db:push` or `db:migrate`, and `npm run d
 ## Project layout (high level)
 
 ```
-src/
-  app/           # Routes, layouts, server actions
-  auth.ts        # Auth.js config + credentials provider
-  auth.config.ts # Shared session / page options
-  proxy.ts       # Auth gate for /tasks routes (Next.js 16 “proxy”)
-  lib/db.ts      # Prisma singleton
 prisma/
-  schema.prisma  # Data model
+  schema.prisma       # Tables and fields (User, Task)
+
+src/
+  app/                # Pages = URLs (home, login, tasks, …)
+  auth/               # Login / session setup (Auth.js)
+  components/         # Navbar, buttons, small UI pieces
+  database/           # Prisma database client (one connection)
+  server/             # Saving data: tasks + registration
+  proxy.ts            # Sends guests away from /tasks until they log in
 ```
+
+**Beginner map:** see [`FOLDER-GUIDE.md`](./FOLDER-GUIDE.md) for a plain-English walkthrough of each folder.
 
 ## Development log
 

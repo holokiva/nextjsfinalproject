@@ -5,7 +5,7 @@ Short notes on how this project grew and what we fixed along the way.
 ## Stage 1 — Project setup
 
 - Scaffolded Next.js (App Router, TypeScript, Tailwind).
-- Added Prisma with PostgreSQL, a first `Task` model, and `src/lib/db.ts` for one shared `PrismaClient` in development.
+- Added Prisma with PostgreSQL, a first `Task` model, and a single shared `PrismaClient` (now in `src/database/prisma.ts`).
 - Built a minimal home page, navbar, and a placeholder `/tasks` route so `npm run dev` always worked.
 
 ## Stage 2 — Authentication
@@ -18,7 +18,7 @@ Short notes on how this project grew and what we fixed along the way.
 **Problems solved**
 
 - Chose **JWT + credentials** so we did not need database session tables on day one.
-- Split **`auth.config.ts`** vs **`auth.ts`** where helpful, then relied on one **`auth()`** for the proxy after Next 16 moved proxy to the Node runtime.
+- Auth lives under **`src/auth/`** (`index.ts` + `config.ts`); the app uses one **`auth()`** helper for pages and `src/proxy.ts` after Next 16 introduced the proxy file.
 
 ## Stage 3 — Task CRUD
 
@@ -42,3 +42,12 @@ Short notes on how this project grew and what we fixed along the way.
 **Problems solved**
 
 - Aligned spacing and typography across auth forms and task forms so the app feels finished without a big refactor.
+
+## Stage 5 — Easier folder names (find things faster)
+
+- Grouped files by **job**: **`src/auth/`** (login), **`src/database/`** (Prisma), **`src/server/`** (save/update/delete tasks + register).
+- Added **`FOLDER-GUIDE.md`** at the project root so non-coders can match “what I want to change” → “which file”.
+
+**Problems solved**
+
+- Fewer mystery files at `src/` root; names read closer to plain English (“database”, “server”, “auth”).

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { createTask, type TaskFormState } from "../actions";
+import { createTask, type TaskFormState } from "@/server/task-actions";
 
 const initial: TaskFormState = {};
 

@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/database/prisma";
 
 export type RegisterState = {
   error?: string;

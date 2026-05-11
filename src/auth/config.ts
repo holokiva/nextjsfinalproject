@@ -2,8 +2,6 @@ import type { NextAuthConfig } from "next-auth";
 
 /**
  * Shared Auth.js options (session shape, custom pages).
- * Used by the full `auth.ts` and by a slim middleware instance so the
- * middleware bundle does not pull in Prisma / bcrypt.
  */
 export default {
   trustHost: true,

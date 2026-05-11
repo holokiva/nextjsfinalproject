@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/database/prisma";
 import { EditTaskForm } from "./EditTaskForm";
 
 type Props = { params: Promise<{ id: string }> };

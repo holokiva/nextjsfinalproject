@@ -2,7 +2,7 @@
 
 import type { Task } from "@prisma/client";
 import { useFormState, useFormStatus } from "react-dom";
-import { updateTask, type TaskFormState } from "../../actions";
+import { updateTask, type TaskFormState } from "@/server/task-actions";
 import { toDatetimeLocalValue } from "../../labels";
 
 const initial: TaskFormState = {};

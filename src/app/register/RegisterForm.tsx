@@ -2,7 +2,7 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
-import { registerAction, type RegisterState } from "./actions";
+import { registerAction, type RegisterState } from "@/server/register-actions";
 
 const initial: RegisterState = {};
 

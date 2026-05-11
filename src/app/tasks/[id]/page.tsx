@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/database/prisma";
 import { formatDueDate, priorityLabel, statusLabel } from "../labels";
 import { DeleteTaskForm } from "./DeleteTaskForm";
 

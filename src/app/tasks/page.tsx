@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { auth } from "@/auth";
-import { prisma } from "@/lib/db";
+import { prisma } from "@/database/prisma";
 import { formatDueDate, priorityLabel, statusLabel } from "./labels";
 
 export default async function TasksPage() {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
-import { deleteTask } from "../actions";
+import { deleteTask } from "@/server/task-actions";
 
 function DeleteButton() {
   const { pending } = useFormStatus();
