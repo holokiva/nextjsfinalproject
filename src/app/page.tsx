@@ -4,8 +4,8 @@ export default function Home() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Welcome</h1>
         <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-          This is a student-style Task Manager app. The navbar links to placeholder
-          pages; database and CRUD will be added in later steps.
+        Organize your daily tasks and keep track of your progress. The navbar links to placeholder
+          pages; 
         </p>
       </div>
       <section className="rounded-lg border border-zinc-200 bg-white p-4 text-sm dark:border-zinc-800 dark:bg-zinc-900">
