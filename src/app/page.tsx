@@ -1,19 +1,56 @@
-export default function Home() {
+import Link from "next/link";
+import { auth } from "@/auth";
+
+export default async function Home() {
+  const session = await auth();
+
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-10">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Welcome</h1>
-        <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-        Organize your daily tasks and keep track of your progress. The navbar links to placeholder
-          pages; 
+    <main className="tm-page flex flex-col gap-10">
+      <section className="space-y-4">
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Task Manager</h1>
+        <p className="max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+          A simple place to organize tasks: set priority, track status, and add due dates. Sign in
+          to manage your own list—each task stays private to your account.
         </p>
-      </div>
-      <section className="rounded-lg border border-zinc-200 bg-white p-4 text-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <p className="font-medium text-zinc-800 dark:text-zinc-200">Stack</p>
-        <ul className="mt-2 list-inside list-disc text-zinc-600 dark:text-zinc-400">
-          <li>Next.js App Router + TypeScript</li>
-          <li>Tailwind CSS</li>
-          <li>Prisma + PostgreSQL</li>
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {session?.user ? (
+            <Link href="/tasks" className="tm-btn-primary w-full sm:w-auto">
+              Go to tasks
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" className="tm-btn-primary w-full sm:w-auto">
+                Log in
+              </Link>
+              <Link href="/register" className="tm-btn-secondary w-full sm:w-auto">
+                Create account
+              </Link>
+            </>
+          )}
+        </div>
+      </section>
+
+      <section className="tm-card">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Built with
+        </h2>
+        <ul className="mt-4 grid gap-2 text-sm text-zinc-700 dark:text-zinc-300 sm:grid-cols-2">
+          <li className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+            Next.js App Router + TypeScript
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+            Tailwind CSS
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+            Prisma + PostgreSQL
+          </li>
+          <li className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" aria-hidden />
+            Auth.js (credentials + sessions)
+          </li>
         </ul>
       </section>
     </main>

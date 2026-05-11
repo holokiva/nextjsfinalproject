@@ -20,68 +20,61 @@ export default async function TaskDetailPage({ params }: Props) {
   if (!task) notFound();
 
   return (
-    <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-6 px-4 py-10">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
-            <Link href="/tasks" className="underline underline-offset-2">
-              ← All tasks
-            </Link>
+    <main className="tm-page flex flex-col gap-8">
+      <nav className="text-sm text-zinc-600 dark:text-zinc-400">
+        <Link href="/tasks" className="tm-nav-link inline-block px-0 font-medium text-zinc-700 dark:text-zinc-300">
+          ← Tasks
+        </Link>
+      </nav>
+
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 flex-1 space-y-2">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{task.title}</h1>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+            Last updated {task.updatedAt.toLocaleString()}
           </p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight">{task.title}</h1>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex w-full flex-col gap-2 sm:flex-row sm:flex-wrap lg:w-auto lg:shrink-0">
           <Link
             href={`/tasks/${task.id}/edit`}
-            className="rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white dark:bg-zinc-100 dark:text-zinc-900"
+            className="tm-btn-primary w-full text-center sm:w-auto sm:flex-1 lg:flex-none"
           >
-            Edit
+            Edit task
           </Link>
           <DeleteTaskForm taskId={task.id} />
         </div>
       </div>
 
-      <section className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
-          Details
+      <section className="tm-card space-y-4">
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Description
         </h2>
-        <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Description</dt>
-            <dd className="mt-1 whitespace-pre-wrap text-sm text-zinc-800 dark:text-zinc-200">
-              {task.description.trim() ? task.description : "—"}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Priority</dt>
-            <dd className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">
-              {priorityLabel[task.priority]}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Status</dt>
-            <dd className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">
-              {statusLabel[task.status]}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Due date</dt>
-            <dd className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">
-              {formatDueDate(task.dueDate)}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Created</dt>
-            <dd className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">
-              {task.createdAt.toLocaleString()}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium text-zinc-500">Last updated</dt>
-            <dd className="mt-1 text-sm text-zinc-800 dark:text-zinc-200">
-              {task.updatedAt.toLocaleString()}
-            </dd>
-          </div>
+        <p className="whitespace-pre-wrap text-sm leading-relaxed text-zinc-800 dark:text-zinc-200">
+          {task.description.trim() ? task.description : "No description added."}
+        </p>
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          Task info
+        </h2>
+        <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { label: "Priority", value: priorityLabel[task.priority] },
+            { label: "Status", value: statusLabel[task.status] },
+            { label: "Due date", value: formatDueDate(task.dueDate) },
+            { label: "Created", value: task.createdAt.toLocaleString() },
+          ].map((row) => (
+            <div
+              key={row.label}
+              className="rounded-lg border border-zinc-200/80 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950/50"
+            >
+              <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                {row.label}
+              </dt>
+              <dd className="mt-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">{row.value}</dd>
+            </div>
+          ))}
         </dl>
       </section>
     </main>

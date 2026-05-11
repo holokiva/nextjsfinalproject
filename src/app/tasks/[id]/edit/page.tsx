@@ -19,15 +19,20 @@ export default async function EditTaskPage({ params }: Props) {
   if (!task) notFound();
 
   return (
-    <main className="mx-auto flex w-full max-w-lg flex-1 flex-col gap-6 px-4 py-10">
+    <main className="tm-page-narrow flex flex-col gap-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Edit task</h1>
-        <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          <Link href={`/tasks/${task.id}`} className="underline underline-offset-2">
-            Back to task
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Edit task</h1>
+        <p className="mt-2 flex flex-wrap gap-x-2 gap-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+          <Link
+            href={`/tasks/${task.id}`}
+            className="font-medium text-zinc-800 underline underline-offset-2 dark:text-zinc-200"
+          >
+            ← Task
           </Link>
-          {" · "}
-          <Link href="/tasks" className="underline underline-offset-2">
+          <span className="text-zinc-300 dark:text-zinc-600" aria-hidden>
+            ·
+          </span>
+          <Link href="/tasks" className="font-medium text-zinc-800 underline underline-offset-2 dark:text-zinc-200">
             All tasks
           </Link>
         </p>

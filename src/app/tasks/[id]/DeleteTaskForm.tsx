@@ -6,11 +6,7 @@ import { deleteTask } from "../actions";
 function DeleteButton() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="rounded-md border border-red-300 px-3 py-2 text-sm font-medium text-red-700 disabled:opacity-60 dark:border-red-900 dark:text-red-400"
-    >
+    <button type="submit" disabled={pending} className="tm-btn-danger">
       {pending ? "Deleting…" : "Delete task"}
     </button>
   );
@@ -25,7 +21,7 @@ export function DeleteTaskForm({ taskId }: { taskId: string }) {
           e.preventDefault();
         }
       }}
-      className="inline"
+      className="w-full sm:w-auto"
     >
       <input type="hidden" name="id" value={taskId} />
       <DeleteButton />
