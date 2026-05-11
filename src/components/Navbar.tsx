@@ -30,6 +30,14 @@ export async function Navbar() {
           </li>
           {session?.user ? (
             <>
+              <li>
+                <Link
+                  href="/tasks/create"
+                  className="hover:text-zinc-900 dark:hover:text-zinc-200"
+                >
+                  New task
+                </Link>
+              </li>
               <li className="hidden text-xs text-zinc-500 sm:inline">
                 {session.user.email}
               </li>
