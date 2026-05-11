@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { createTask, type TaskFormState } from "@/server/task-actions";
 
 const initial: TaskFormState = {};
@@ -15,7 +16,7 @@ function SubmitButton() {
 }
 
 export function CreateTaskForm() {
-  const [state, formAction] = useFormState(createTask, initial);
+  const [state, formAction] = useActionState(createTask, initial);
 
   return (
     <form action={formAction} className="tm-form-card">

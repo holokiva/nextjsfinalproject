@@ -1,7 +1,8 @@
 "use client";
 
 import type { Task } from "@prisma/client";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { updateTask, type TaskFormState } from "@/server/task-actions";
 import { toDatetimeLocalValue } from "../../labels";
 
@@ -17,7 +18,7 @@ function SubmitButton() {
 }
 
 export function EditTaskForm({ task }: { task: Task }) {
-  const [state, formAction] = useFormState(
+  const [state, formAction] = useActionState(
     updateTask.bind(null, task.id),
     initial,
   );

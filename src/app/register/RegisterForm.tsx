@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import Link from "next/link";
 import { registerAction, type RegisterState } from "@/server/register-actions";
 
@@ -16,7 +17,7 @@ function SubmitButton() {
 }
 
 export function RegisterForm() {
-  const [state, formAction] = useFormState(registerAction, initial);
+  const [state, formAction] = useActionState(registerAction, initial);
 
   return (
     <form action={formAction} className="tm-form-card">
