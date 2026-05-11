@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
 }
 
@@ -22,5 +22,55 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Shared patterns — keeps forms and buttons consistent without extra components. */
+@layer components {
+  .tm-page {
+    @apply mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6 sm:py-12;
+  }
+
+  .tm-page-narrow {
+    @apply mx-auto w-full max-w-lg flex-1 px-4 py-8 sm:px-6 sm:py-12;
+  }
+
+  .tm-label {
+    @apply text-sm font-medium text-zinc-800 dark:text-zinc-200;
+  }
+
+  .tm-input {
+    @apply w-full min-h-[44px] rounded-lg border border-zinc-300 bg-white px-3 py-2.5 text-sm text-zinc-900 shadow-sm outline-none transition focus:border-zinc-500 focus:ring-2 focus:ring-zinc-400/35 disabled:cursor-not-allowed disabled:opacity-60 dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100 dark:focus:border-zinc-400 dark:focus:ring-zinc-500/25;
+  }
+
+  .tm-form-card {
+    @apply flex flex-col gap-5 rounded-xl border border-zinc-200/90 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900;
+  }
+
+  .tm-btn-primary {
+    @apply inline-flex min-h-[44px] items-center justify-center rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800 active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white;
+  }
+
+  .tm-btn-secondary {
+    @apply inline-flex min-h-[44px] items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-sm font-medium text-zinc-800 shadow-sm transition hover:bg-zinc-50 active:scale-[0.99] dark:border-zinc-600 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:bg-zinc-900;
+  }
+
+  .tm-btn-danger {
+    @apply inline-flex min-h-[44px] w-full items-center justify-center rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-800 shadow-sm transition hover:bg-red-100 active:scale-[0.99] disabled:opacity-50 dark:border-red-900/40 dark:bg-red-950/35 dark:text-red-300 dark:hover:bg-red-950/55 sm:w-auto;
+  }
+
+  .tm-alert-error {
+    @apply rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200;
+  }
+
+  .tm-alert-success {
+    @apply rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-900 dark:border-emerald-900/40 dark:bg-emerald-950/35 dark:text-emerald-200;
+  }
+
+  .tm-card {
+    @apply rounded-xl border border-zinc-200/90 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900;
+  }
+
+  .tm-nav-link {
+    @apply rounded-md px-1 py-1 text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100;
+  }
 }
