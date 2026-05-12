@@ -1,8 +1,6 @@
 # Task Manager
 
-A small full-stack task manager built as a student-style assignment. You can register, log in, and maintain your own tasks (title, description, priority, status, optional due date). Tasks are private: you only see and edit what you created.
-
-**New to the codebase?** Open [`FOLDER-GUIDE.md`](./FOLDER-GUIDE.md) first — it explains what each folder is for in plain language.
+A small full-stack task manager built. You can register, log in, and maintain your own tasks (title, description, priority, status, optional due date). Tasks are private: you only see and edit what you created.
 
 ## Technologies
 
@@ -112,10 +110,6 @@ src/
   server/             # Saving data: tasks + registration
   proxy.ts            # Sends guests away from /tasks until they log in
 ```
-
-**Beginner map:** see [`FOLDER-GUIDE.md`](./FOLDER-GUIDE.md) for a plain-English walkthrough of each folder.
-
-## Development log
 
 See [`DEVLOG.md`](./DEVLOG.md) for stages, features, and problems solved during development.
 
